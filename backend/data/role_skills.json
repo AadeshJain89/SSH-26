@@ -1,0 +1,30 @@
+{
+  "role": "Frontend Developer",
+  "skills": [
+    {
+      "name": "HTML & CSS",
+      "priority": "must-have",
+      "depth": "intermediate"
+    },
+    {
+      "name": "JavaScript Fundamentals",
+      "priority": "must-have",
+      "depth": "intermediate"
+    },
+    {
+      "name": "Frontend Frameworks",
+      "priority": "must-have",
+      "depth": "basic"
+    },
+    {
+      "name": "Git & Version Control",
+      "priority": "nice-to-have",
+      "depth": "basic"
+    },
+    {
+      "name": "Browser Basics",
+      "priority": "nice-to-have",
+      "depth": "basic"
+    }
+  ]
+}
