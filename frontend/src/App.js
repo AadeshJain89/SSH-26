@@ -1,50 +1,55 @@
 import { useState } from "react";
+
 import Landing from "./pages/Landing";
 import SkillDeclaration from "./pages/SkillDeclaration";
 import Verification from "./pages/Verification";
 import Roadmap from "./pages/Roadmap";
-import StepIndicator from "./components/StepIndicator";
 
 function App() {
-  const [stage, setStage] = useState("landing");
-  const [formData, setFormData] = useState({});
+  const [step, setStep] = useState(0);
 
-  const stepIndex =
-    stage === "landing" ? 0 :
-    stage === "skills" ? 1 :
-    stage === "verification" ? 2 : 3;
+  // GLOBAL STATE (important)
+  const [declaredSkills, setDeclaredSkills] = useState([]);
+  const [verificationResults, setVerificationResults] = useState({});
+  const [roadmapData, setRoadmapData] = useState([]);
+
+  const goNext = () => setStep((prev) => prev + 1);
+  const goBack = () => setStep((prev) => prev - 1);
 
   return (
-    <div className="container">
-      <StepIndicator step={stepIndex} />
+    <>
+      {step === 0 && <Landing onStart={goNext} />}
 
-      {stage === "landing" && (
-        <Landing onNext={() => setStage("skills")} />
-      )}
-
-      {stage === "skills" && (
+      {step === 1 && (
         <SkillDeclaration
-          onNext={(data) => {
-            setFormData({ ...formData, ...data });
-            setStage("verification");
+          onNext={(skills) => {
+            setDeclaredSkills(skills);
+            goNext();
           }}
+          onBack={goBack}
         />
       )}
 
-      {stage === "verification" && (
+      {step === 2 && (
         <Verification
-          declaredSkills={formData.declared_skills}
-          onNext={(data) => {
-            setFormData({ ...formData, ...data });
-            setStage("result");
+          declaredSkills={declaredSkills}
+          onNext={(results) => {
+            setVerificationResults(results);
+            goNext();
           }}
+          onBack={goBack}
         />
       )}
 
-      {stage === "result" && (
-        <Roadmap formData={formData} />
+      {step === 3 && (
+        <Roadmap
+          declaredSkills={declaredSkills}
+          verificationResults={verificationResults}
+          roadmapData={roadmapData}
+          setRoadmapData={setRoadmapData}
+        />
       )}
-    </div>
+    </>
   );
 }
 
