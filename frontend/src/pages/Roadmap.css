@@ -1,0 +1,265 @@
+/* ========== Roadmap – template theme (teal/mint, dark gray, white) ========== */
+
+.roadmap-root {
+  --roadmap-dark: #333333;
+  --roadmap-muted: #666666;
+  --roadmap-accent: #00B09A;
+  --roadmap-bg: #ffffff;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+  background: var(--roadmap-bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--roadmap-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Template header ---------- */
+.roadmap-template-header {
+  position: relative;
+  margin-bottom: 48px;
+}
+
+.roadmap-main-title-wrap {
+  margin-bottom: 8px;
+}
+
+.roadmap-main-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.roadmap-title-dark {
+  color: var(--roadmap-dark);
+}
+
+.roadmap-title-accent {
+  color: var(--roadmap-accent);
+}
+
+.roadmap-title-underline {
+  width: 280px;
+  height: 3px;
+  background: var(--roadmap-accent);
+  margin-top: 4px;
+}
+
+/* ---------- Two-column diagram ---------- */
+.roadmap-diagram {
+  display: grid;
+  grid-template-columns: 1fr 32px 1fr;
+  gap: 0;
+  align-items: start;
+  margin-bottom: 48px;
+  min-height: 420px;
+}
+
+.roadmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.roadmap-col-center {
+  align-items: center;
+  padding-top: 28px;
+}
+
+.roadmap-vertical-connector {
+  width: 0;
+  flex: 1;
+  min-height: 320px;
+  border-left: 2px dashed var(--roadmap-muted);
+  opacity: 0.7;
+}
+
+.roadmap-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  position: relative;
+}
+
+.roadmap-col-left .roadmap-step {
+  flex-direction: row;
+  text-align: left;
+}
+
+.roadmap-col-right .roadmap-step {
+  flex-direction: row;
+  text-align: left;
+}
+
+.roadmap-step-circle {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roadmap-step-icon {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.roadmap-step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.roadmap-step-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--roadmap-dark);
+  margin: 0 0 6px;
+}
+
+.roadmap-step-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--roadmap-muted);
+  margin: 0;
+}
+
+.roadmap-step-actions {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--roadmap-dark);
+}
+
+.roadmap-step-actions li {
+  margin-bottom: 6px;
+}
+
+.roadmap-step-actions li:last-child {
+  margin-bottom: 0;
+}
+
+.roadmap-step-actions strong {
+  color: var(--roadmap-dark);
+}
+
+.roadmap-step-connector {
+  flex-shrink: 0;
+  width: 24px;
+  align-self: center;
+  border-top: 2px dashed var(--roadmap-muted);
+  opacity: 0.7;
+}
+
+.roadmap-col-left .roadmap-step-connector {
+  margin-left: auto;
+}
+
+.roadmap-col-right .roadmap-step-connector {
+  order: -1;
+  margin-right: 0;
+}
+
+/* ---------- Template footer ---------- */
+.roadmap-template-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-top: 2px solid var(--roadmap-accent);
+  margin-bottom: 48px;
+}
+
+.roadmap-footer-left {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--roadmap-dark);
+}
+
+.roadmap-footer-center {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--roadmap-accent);
+  flex-shrink: 0;
+}
+
+.roadmap-footer-right {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--roadmap-accent);
+}
+
+/* ---------- Your results section (keeps pages.css classes) ---------- */
+.roadmap-results-section {
+  padding-top: 24px;
+}
+
+.roadmap-results-section .roadmap-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--roadmap-dark);
+  margin-bottom: 8px;
+}
+
+.roadmap-results-section .roadmap-subtitle {
+  color: var(--roadmap-muted);
+  margin-bottom: 32px;
+}
+
+.roadmap-results-section .roadmap-section-title.must {
+  color: var(--roadmap-accent);
+}
+
+.roadmap-results-section .roadmap-card {
+  background: #f8fafb;
+  border: 1px solid #ecf0f1;
+}
+
+/* Responsive: stack columns */
+@media (max-width: 900px) {
+  .roadmap-diagram {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 32px;
+  }
+
+  .roadmap-col-center {
+    order: 2;
+    padding: 0;
+  }
+
+  .roadmap-vertical-connector {
+    min-height: 0;
+    width: 100%;
+    border-left: none;
+    border-top: 2px dashed var(--roadmap-muted);
+  }
+
+  .roadmap-step-connector {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .roadmap-main-title {
+    font-size: 24px;
+  }
+
+  .roadmap-title-underline {
+    width: 180px;
+  }
+
+  .roadmap-template-footer {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+}

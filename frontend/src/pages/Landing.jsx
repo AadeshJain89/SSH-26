@@ -30,7 +30,6 @@ export default function Landing({ onStart, onOpenAuth, onOpenBlog }) {
           <nav className="landing-nav">
             <a href="#home">HOME</a>
             <a href="#about">ABOUT US</a>
-            <a href="#how">HOW IT WORKS</a>
             {onOpenBlog ? (
               <button type="button" className="landing-nav-link" onClick={onOpenBlog}>
                 BLOG

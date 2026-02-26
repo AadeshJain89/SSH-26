@@ -297,6 +297,104 @@ export function adjustDifficulty(current, direction) {
 
 const PASS_THRESHOLD = 0.7; // 70% correct to "pass" a category or topic
 
+/** All roadmap categories — always show every track so the roadmap has multiple items. */
+const ALL_ROADMAP_CATEGORIES = ["Frontend", "Backend", "DevOps", "App Dev"];
+
+/** Roadmap diagram shows these 4 topics (aggregated across categories). */
+export const ROADMAP_TOPICS = ["Database", "Security", "Architecture", "API"];
+
+/**
+ * Get results per topic (Database, Security, Architecture, API) for diagram display.
+ * Aggregates all questions with matching topic across declared categories.
+ */
+export function getTopicBasedResults(verificationResults, declaredSkills) {
+  const categories = getCategoriesFromDeclaration(declaredSkills);
+  if (categories.length === 0) {
+    categories.push("Frontend", "Backend", "DevOps", "App Dev");
+  }
+
+  const results = [];
+  ROADMAP_TOPICS.forEach((topicName) => {
+    let correct = 0;
+    let total = 0;
+    let categoryUsed = "Backend";
+    categories.forEach((cat) => {
+      const questions = (QUIZ_QUESTIONS[cat] || []).filter(
+        (q) => (q.topic || "") === topicName && Object.prototype.hasOwnProperty.call(verificationResults, q.id)
+      );
+      questions.forEach((q) => {
+        total += 1;
+        if (verificationResults[q.id] === true) correct += 1;
+      });
+      if (questions.length > 0) categoryUsed = cat;
+    });
+
+    if (total === 0) {
+      results.push({
+        name: topicName,
+        score: 0,
+        total: 0,
+        passed: false,
+        reason: "Declare skills and take the quiz to see your result.",
+      });
+      return;
+    }
+
+    const passed = correct / total >= PASS_THRESHOLD;
+    const pct = Math.round((correct / total) * 100);
+    const suggestion = getTopicSuggestion(categoryUsed, topicName, correct, total);
+    results.push({
+      name: topicName,
+      score: correct,
+      total,
+      passed,
+      reason: suggestion,
+    });
+  });
+  return results;
+}
+
+/**
+ * Get results for every category (for diagram display).
+ * Always returns all 4 categories so the roadmap always shows multiple items.
+ * Declared + quiz-attempted categories get real scores; others get "Declare and take the quiz".
+ */
+export function getAllCategoryResults(verificationResults, declaredSkills) {
+  const results = [];
+  ALL_ROADMAP_CATEGORIES.forEach((category) => {
+    const allQuestions = QUIZ_QUESTIONS[category] || [];
+    const questions = allQuestions.filter((q) => Object.prototype.hasOwnProperty.call(verificationResults, q.id));
+    if (questions.length === 0) {
+      results.push({
+        name: category,
+        score: 0,
+        total: 0,
+        passed: false,
+        reason: "Declare this skill and take the quiz to see your result.",
+      });
+      return;
+    }
+
+    let correct = 0;
+    questions.forEach((q) => {
+      if (verificationResults[q.id] === true) correct += 1;
+    });
+    const total = questions.length;
+    const passed = correct / total >= PASS_THRESHOLD;
+    const pct = Math.round((correct / total) * 100);
+    results.push({
+      name: category,
+      score: correct,
+      total,
+      passed,
+      reason: passed
+        ? `${correct}/${total} correct (${pct}%) — keep practicing.`
+        : `${correct}/${total} correct (${pct}%) — focus on this area.`,
+    });
+  });
+  return results;
+}
+
 /**
  * Build detailed learning roadmap from quiz results.
  * Returns list of categories that need improvement, each with:
