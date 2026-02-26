@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PageContainer from "../layout/PageContainer";
-import StepIndicator from "../components/StepIndicator";
 import "./pages.css";
 
 const QUESTIONS = [
@@ -39,8 +38,6 @@ export default function Verification({ onNext, onBack }) {
 
   return (
     <PageContainer>
-      <StepIndicator current={2} />
-
       <div className="verify-root">
         <h2 className="verify-title">Quick skill check</h2>
 

@@ -32,10 +32,23 @@
   justify-content: space-between;
 }
 
-.landing-brand {
+.landing-brand,
+.landing-brand-btn {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.landing-brand-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.landing-brand-btn:hover .landing-brand-name {
+  color: var(--landing-dark);
 }
 
 .landing-brand-icon {
@@ -72,6 +85,92 @@
 }
 
 .landing-nav a:hover {
+  color: var(--landing-dark);
+}
+
+.landing-nav-link {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--landing-muted);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.landing-nav-link:hover {
+  color: var(--landing-dark);
+}
+
+/* Contact dropdown */
+.landing-contact-wrap {
+  position: relative;
+}
+
+.landing-contact-trigger {
+  display: inline-flex;
+}
+
+.landing-contact-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  min-width: 220px;
+  background: var(--landing-bg-card);
+  border: 1px solid var(--landing-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px var(--landing-shadow);
+  padding: 16px;
+  z-index: 10;
+}
+
+.landing-contact-item {
+  margin-bottom: 12px;
+}
+
+.landing-contact-item:last-child {
+  margin-bottom: 0;
+}
+
+.landing-contact-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--landing-muted);
+  margin-bottom: 4px;
+}
+
+.landing-contact-dropdown a {
+  font-size: 13px;
+  color: var(--landing-text);
+}
+
+.landing-contact-dropdown a:hover {
+  color: var(--landing-accent);
+}
+
+.landing-contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.landing-nav-signin {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--landing-muted);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.landing-nav-signin:hover {
   color: var(--landing-dark);
 }
 

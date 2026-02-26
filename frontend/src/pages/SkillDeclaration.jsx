@@ -1,68 +1,72 @@
 import { useState } from "react";
 import PageContainer from "../layout/PageContainer";
-import StepIndicator from "../components/StepIndicator";
 import "./pages.css";
+import "./SkillDeclaration.css";
 
 const SKILLS = [
-  "HTML & CSS",
-  "JavaScript Fundamentals",
-  "Git",
-  "Frontend Frameworks",
-  "Backend Basics",
-  "Databases",
+  { name: "Backend", icon: "server" },
+  { name: "DevOps", icon: "branch" },
+  { name: "App Dev Frontend", icon: "layers" },
+  { name: "Frontend", icon: "monitor" },
 ];
 
 export default function SkillDeclaration({ onNext, onBack }) {
   const [selected, setSelected] = useState([]);
 
-  const toggleSkill = (skill) => {
+  const toggleSkill = (name) => {
     setSelected((prev) =>
-      prev.includes(skill)
-        ? prev.filter((s) => s !== skill)
-        : [...prev, skill]
+      prev.includes(name) ? prev.filter((s) => s !== name) : [...prev, name]
     );
   };
 
   return (
-    <PageContainer>
-      <StepIndicator current={1} />
+    <div className="skill-declaration-page">
+      <div className="skill-declaration-accent skill-declaration-accent-left" />
+      <div className="skill-declaration-accent skill-declaration-accent-right" />
 
-      <div className="skill-root">
-        <h2 className="skill-title">What skills do you already know?</h2>
+      <PageContainer>
+        <div className="skill-declaration-root">
+          <h1 className="skill-declaration-title">
+            Personalize your quiz experience
+          </h1>
+          <p className="skill-declaration-subtitle">
+            For a tailored skill check, tell us what you already work with.
+          </p>
+          <p className="skill-declaration-subtitle-secondary">
+            You can come back and change this later.
+          </p>
 
-        <p className="skill-subtitle">
-          Select everything you’re somewhat familiar with.
-          You don’t need to be an expert.
-        </p>
+          <div className="skill-declaration-grid">
+            {SKILLS.map(({ name, icon }) => (
+              <button
+                key={name}
+                type="button"
+                className={`skill-declaration-card ${
+                  selected.includes(name) ? "skill-declaration-card-selected" : ""
+                }`}
+                onClick={() => toggleSkill(name)}
+              >
+                <span className={`skill-declaration-icon skill-declaration-icon-${icon}`} aria-hidden="true" />
+                <span className="skill-declaration-label">{name}</span>
+              </button>
+            ))}
+          </div>
 
-        <div className="skill-grid">
-          {SKILLS.map((skill) => (
-            <div
-              key={skill}
-              className={`skill-card ${
-                selected.includes(skill) ? "active" : ""
-              }`}
-              onClick={() => toggleSkill(skill)}
+          <div className="skill-declaration-actions">
+            <button type="button" className="skill-declaration-btn secondary" onClick={onBack}>
+              Back
+            </button>
+            <button
+              type="button"
+              className="skill-declaration-btn primary"
+              onClick={() => onNext(selected)}
+              disabled={selected.length === 0}
             >
-              {skill}
-            </div>
-          ))}
+              Continue
+            </button>
+          </div>
         </div>
-
-        <div className="skill-actions">
-          <button className="secondary-btn" onClick={onBack}>
-            Back
-          </button>
-
-          <button
-            className="primary-btn"
-            onClick={onNext}
-            disabled={selected.length === 0}
-          >
-            Continue
-          </button>
-        </div>
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </div>
   );
 }

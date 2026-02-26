@@ -546,6 +546,84 @@
   margin-bottom: 48px;
 }
 
+.roadmap-success {
+  text-align: center;
+  padding: 32px 24px;
+  background: #ecfdf5;
+  border-radius: 14px;
+  margin-bottom: 24px;
+}
+
+.roadmap-success-text {
+  font-size: 15px;
+  color: #065f46;
+  margin: 0;
+}
+
+.roadmap-overconfidence {
+  padding: 16px 20px;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.roadmap-overconfidence strong {
+  display: block;
+  font-size: 14px;
+  color: #92400e;
+  margin-bottom: 6px;
+}
+
+.roadmap-overconfidence p {
+  font-size: 14px;
+  color: #78350f;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.roadmap-empty {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--text-muted);
+}
+
+.roadmap-score {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 8px 0;
+}
+
+.roadmap-focus-list {
+  list-style: none;
+  margin: 12px 0 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border-light);
+  padding-top: 12px;
+}
+
+.roadmap-focus-item {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.roadmap-focus-item:last-child {
+  margin-bottom: 0;
+}
+
+.roadmap-focus-topic {
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.roadmap-focus-suggestion {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
 /* Sections */
 
 .roadmap-section {

@@ -5,7 +5,14 @@ from backend.data.loader import load_role_skills
 from backend.data.store import record_assessment
 from backend.logic.assessment_engine import SkillStatus, classify_skills
 from backend.logic.recommendation_engine import generate_roadmap
-from backend.models.schemas import RoadmapRequest, RoadmapResponse
+from backend.models.schemas import (
+    RoadmapRequest,
+    RoadmapResponse,
+    QuizSubmissionRequest,
+    QuizSubmissionResponse,
+)
+from backend.data.store import record_quiz_submission
+from backend.logic.confidence import detect_overconfidence
 
 from backend.api.auth import router as auth_router
 from backend.api.analytics import router as analytics_router
@@ -65,3 +72,24 @@ def generate_roadmap_api(request: RoadmapRequest):
     )
 
     return {"roadmap": roadmap}
+
+
+@app.post("/submit-quiz", response_model=QuizSubmissionResponse)
+def submit_quiz(request: QuizSubmissionRequest):
+    """
+    Store quiz results and per-question confidence (time spent, answer changes).
+    Returns overconfidence detection: declared vs validated gap when user scored
+    low but answered fast with few changes.
+    """
+    record_quiz_submission(
+        user_id=request.user_id,
+        declared_skills=request.declared_skills,
+        results=request.results,
+        confidence=request.confidence,
+    )
+    detected, summary = detect_overconfidence(request.results, request.confidence)
+    return QuizSubmissionResponse(
+        ok=True,
+        overconfidence_detected=detected,
+        overconfidence_summary=summary if detected else None,
+    )

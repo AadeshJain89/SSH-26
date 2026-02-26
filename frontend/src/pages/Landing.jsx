@@ -1,22 +1,75 @@
+import { useState, useRef, useEffect } from "react";
 import "./Landing.css";
 
-export default function Landing({ onStart }) {
+export default function Landing({ onStart, onOpenAuth, onOpenBlog }) {
+  const [contactOpen, setContactOpen] = useState(false);
+  const contactRef = useRef(null);
+
+  useEffect(() => {
+    if (!contactOpen) return;
+    const handleClickOutside = (e) => {
+      if (contactRef.current && !contactRef.current.contains(e.target)) setContactOpen(false);
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [contactOpen]);
+
+  const scrollToHome = () => {
+    document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="landing-page">
       {/* Header */}
       <header className="landing-header">
         <div className="landing-header-inner">
-          <div className="landing-brand">
+          <button type="button" className="landing-brand-btn" onClick={scrollToHome} aria-label="Go to home">
             <span className="landing-brand-icon">H</span>
             <span className="landing-brand-name">HustleUp</span>
-          </div>
+          </button>
           <nav className="landing-nav">
             <a href="#home">HOME</a>
             <a href="#about">ABOUT US</a>
-            <a href="#services">SERVICES</a>
             <a href="#how">HOW IT WORKS</a>
-            <a href="#blog">BLOG</a>
-            <a href="#contact">CONTACT</a>
+            {onOpenBlog ? (
+              <button type="button" className="landing-nav-link" onClick={onOpenBlog}>
+                BLOG
+              </button>
+            ) : (
+              <a href="#blog">BLOG</a>
+            )}
+            <div className="landing-contact-wrap" ref={contactRef}>
+              <button
+                type="button"
+                className="landing-nav-link landing-contact-trigger"
+                onClick={() => setContactOpen(!contactOpen)}
+                aria-expanded={contactOpen}
+                aria-haspopup="true"
+              >
+                CONTACT
+              </button>
+              {contactOpen && (
+                <div className="landing-contact-dropdown">
+                  <div className="landing-contact-item">
+                    <span className="landing-contact-label">Email</span>
+                    <a href="mailto:contact@hustleup.com">contact@hustleup.com</a>
+                  </div>
+                  <div className="landing-contact-item">
+                    <span className="landing-contact-label">Socials</span>
+                    <div className="landing-contact-socials">
+                      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            {onOpenAuth && (
+              <button type="button" className="landing-nav-signin" onClick={onOpenAuth}>
+                SIGN IN
+              </button>
+            )}
           </nav>
           <div className="landing-header-icons">
             <span className="landing-icon-circle" aria-hidden="true">GM</span>
@@ -38,7 +91,7 @@ export default function Landing({ onStart }) {
               assessment and a clear roadmap — even if you don't know what
               skills are called yet.
             </p>
-            <button type="button" className="landing-btn landing-btn-primary" onClick={onStart}>
+            <button type="button" className="landing-btn landing-btn-primary" onClick={onOpenAuth || onStart}>
               GET STARTED
             </button>
           </div>
@@ -178,7 +231,7 @@ export default function Landing({ onStart }) {
           Join learners who use HustleUp to get a clear path and the right
           depth for every skill.
         </p>
-        <button type="button" className="landing-btn landing-btn-cta" onClick={onStart}>
+        <button type="button" className="landing-btn landing-btn-cta" onClick={onOpenAuth || onStart}>
           GET STARTED
         </button>
       </section>
