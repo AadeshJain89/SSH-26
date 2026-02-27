@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 
 class RoadmapRequest(BaseModel):
@@ -24,3 +24,42 @@ class QuizSubmissionResponse(BaseModel):
     ok: bool = True
     overconfidence_detected: bool = False
     overconfidence_summary: Optional[str] = None
+
+
+# --- Multi-role alignment & role transition ---
+
+# topic_scores: { "Backend": { "Database": { "correct": 0, "total": 3 }, ... }, ... }
+class TopicScoresRequest(BaseModel):
+    topic_scores: Dict[str, Dict[str, Dict[str, int]]]
+
+
+class RoleAlignmentItem(BaseModel):
+    role_id: str
+    role_name: str
+    alignment_pct: int
+    skills_met: List[dict]
+    skill_gap: List[dict]
+    total_skills: int
+    rank: int
+
+
+class MultiRoleAlignmentResponse(BaseModel):
+    roles: List[RoleAlignmentItem]
+
+
+class RoleTransitionRequest(BaseModel):
+    topic_scores: Dict[str, Dict[str, Dict[str, int]]]
+    from_role_id: str
+    to_role_id: str
+
+
+class RoleTransitionResponse(BaseModel):
+    from_role_id: str
+    from_role_name: str
+    to_role_id: str
+    to_role_name: str
+    gap_delta: List[dict]
+    skills_already_met: List[dict]
+    from_role_skills: List[str]
+    to_role_skills: List[str]
+    effort_estimate: Dict[str, Any]

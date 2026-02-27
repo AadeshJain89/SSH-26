@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import PageContainer from "../layout/PageContainer";
-import { getRoadmapFromQuizResults, getTopicBasedResults } from "../data/quizQuestions";
+import { getRoadmapFromQuizResults, getTopicLevelRoadmapSteps, buildTopicScoresForAlignment } from "../data/quizQuestions";
+import { getMultiRoleAlignment } from "../api";
 import "./Roadmap.css";
 import "./pages.css";
 
@@ -24,26 +25,46 @@ export default function Roadmap({ declaredSkills, verificationResults, overconfi
     [verificationResults, declaredSkills]
   );
 
-  const topicResults = useMemo(
-    () => getTopicBasedResults(verificationResults || {}, declaredSkills || []),
+  const diagramTopicSteps = useMemo(
+    () => getTopicLevelRoadmapSteps(verificationResults || {}, declaredSkills || []),
     [verificationResults, declaredSkills]
   );
 
+  const topicScores = useMemo(
+    () => buildTopicScoresForAlignment(verificationResults || {}),
+    [verificationResults]
+  );
+
+  const [alignmentResult, setAlignmentResult] = useState(null);
+
+  const hasQuizResults = Object.keys(verificationResults || {}).length > 0;
+
+  useEffect(() => {
+    if (!hasQuizResults) {
+      setAlignmentResult(null);
+      return;
+    }
+    let cancelled = false;
+    getMultiRoleAlignment(topicScores)
+      .then((data) => { if (!cancelled) setAlignmentResult(data); })
+      .catch(() => { if (!cancelled) setAlignmentResult(null); });
+    return () => { cancelled = true; };
+  }, [hasQuizResults, topicScores]);
+
   const diagramSteps = useMemo(() => {
-    return topicResults.map((r) => ({
-      id: r.name.toLowerCase().replace(/\s+/, "-"),
+    return diagramTopicSteps.map((r) => ({
+      id: r.name.toLowerCase().replace(/\s+/g, "-"),
       title: r.name,
       desc: r.reason,
       color: getStepColor(r.passed, r.score, r.total),
       icon: r.name.charAt(0),
     }));
-  }, [topicResults]);
+  }, [diagramTopicSteps]);
 
   const mid = Math.ceil(diagramSteps.length / 2);
   const leftSteps = diagramSteps.slice(0, mid);
   const rightSteps = diagramSteps.slice(mid);
 
-  const hasQuizResults = Object.keys(verificationResults || {}).length > 0;
   const allPassed = hasQuizResults && roadmap.length === 0;
 
   return (
@@ -144,6 +165,29 @@ export default function Roadmap({ declaredSkills, verificationResults, overconfi
               {roadmap.map((item) => (
                 <RoadmapCard key={item.name} item={item} />
               ))}
+            </div>
+          )}
+
+          {hasQuizResults && alignmentResult && alignmentResult.roles && (
+            <div className="roadmap-section roadmap-role-fit">
+              <h3 className="roadmap-section-title">Role fit</h3>
+              <p className="roadmap-subtitle-small">
+                How well your quiz scores align with each role (70% per topic = skill met).
+              </p>
+              <div className="roadmap-role-list">
+                {alignmentResult.roles.map((r) => (
+                  <div key={r.role_id} className="roadmap-role-card">
+                    <span className="roadmap-role-rank">#{r.rank}</span>
+                    <div className="roadmap-role-main">
+                      <strong>{r.role_name}</strong>
+                      <span className="roadmap-role-pct">{r.alignment_pct}% aligned</span>
+                    </div>
+                    <p className="roadmap-role-meta">
+                      {r.skills_met?.length ?? 0} met, {r.skill_gap?.length ?? 0} gap (of {r.total_skills} skills)
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </section>

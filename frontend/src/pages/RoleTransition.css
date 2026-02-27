@@ -1,0 +1,293 @@
+/* Role Transition Page - Standalone Page */
+
+.role-transition-page {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-transition-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px;
+  background: #f5f8fc;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(26, 95, 122, 0.08);
+}
+
+.role-transition-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.role-transition-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin: 0 0 8px 0;
+}
+
+.role-transition-subtitle {
+  font-size: 15px;
+  color: #5b7a8c;
+  margin: 0;
+}
+
+.role-transition-section {
+  margin-bottom: 32px;
+}
+
+.role-transition-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin: 0 0 20px 0;
+}
+
+.role-transition-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.role-transition-role-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.role-transition-role-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a5f;
+  margin: 0;
+}
+
+.role-transition-select {
+  padding: 12px 16px;
+  background: #ffffff;
+  border: 1px solid #dce9f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1e3a5f;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235b7a8c' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+  transition: border-color 0.2s ease;
+}
+
+.role-transition-select:hover {
+  border-color: #b8d4e3;
+}
+
+.role-transition-select:focus {
+  outline: none;
+  border-color: #1a5f7a;
+  box-shadow: 0 0 0 3px rgba(26, 95, 122, 0.1);
+}
+
+.role-transition-arrow {
+  font-size: 32px;
+  color: #4a9fd4;
+  font-weight: 300;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+/* No Results Message */
+.role-transition-no-results {
+  margin-top: 24px;
+  padding: 20px;
+  background: #ffffff;
+  border: 2px dashed #dce9f0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.role-transition-no-results p {
+  color: #5b7a8c;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Loading */
+.role-transition-loading-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.role-transition-loading {
+  color: #5b7a8c;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Skills to Develop Section */
+.role-transition-skills-develop {
+  margin-top: 32px;
+}
+
+.role-transition-skills-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin: 0 0 8px 0;
+}
+
+.role-transition-skills-subtitle {
+  font-size: 14px;
+  color: #5b7a8c;
+  margin: 0 0 20px 0;
+}
+
+.role-transition-skills-container {
+  margin-bottom: 24px;
+}
+
+.role-transition-skills-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a5f;
+  margin-bottom: 12px;
+}
+
+.role-transition-skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+  border: 2px dashed #dce9f0;
+  border-radius: 8px;
+  background: #ffffff;
+  min-height: 80px;
+}
+
+.role-transition-skills-empty {
+  padding: 20px;
+  text-align: center;
+  color: #5b7a8c;
+  font-size: 14px;
+}
+
+.role-transition-skill-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #f8fafb;
+  border: 1px solid #ecf0f1;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #1e3a5f;
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.role-transition-skill-tag:hover {
+  background: #e8f4f8;
+  border-color: #b8d4e3;
+}
+
+.role-transition-skill-tag-met {
+  background: #e8f5e9;
+  border-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.role-transition-skills-tags-met {
+  border-color: #c8e6c9;
+  background: #f1f8f4;
+}
+
+.role-transition-effort-info {
+  margin-top: 24px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #ecf0f1;
+}
+
+.role-transition-effort {
+  font-weight: 600;
+  color: #1e3a5f;
+  font-size: 14px;
+  margin: 0;
+}
+
+.role-transition-skills-met {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.role-transition-skills-met-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a5f;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Back Button */
+.role-transition-actions {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #ecf0f1;
+  text-align: center;
+}
+
+.role-transition-back-btn {
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a5f;
+  background: transparent;
+  border: 2px solid #dce9f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.role-transition-back-btn:hover {
+  border-color: #b8d4e3;
+  background: #f0f7ff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .role-transition-page {
+    padding: 20px 16px;
+  }
+
+  .role-transition-container {
+    padding: 24px 16px;
+  }
+
+  .role-transition-title {
+    font-size: 22px;
+  }
+
+  .role-transition-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .role-transition-arrow {
+    transform: rotate(90deg);
+    margin: 8px 0;
+    align-self: center;
+  }
+
+  .role-transition-role-group {
+    max-width: 100%;
+  }
+}

@@ -8,9 +8,16 @@ const SKILLS = [
   { name: "DevOps", icon: "branch" },
   { name: "App Dev Frontend", icon: "layers" },
   { name: "Frontend", icon: "monitor" },
+  { name: "Power BI", icon: "database" },
+  { name: "Blockchain", icon: "code" },
+  { name: "Cyber Security", icon: "server" },
+  { name: "Data Analyst", icon: "palette" },
+  { name: "Game Development", icon: "layers" },
+  { name: "Machine Learning", icon: "code" },
+  { name: "AWS", icon: "globe" },
 ];
 
-export default function SkillDeclaration({ onNext, onBack }) {
+export default function SkillDeclaration({ onNext, onBack, onRoleTransition }) {
   const [selected, setSelected] = useState([]);
 
   const toggleSkill = (name) => {
@@ -65,6 +72,22 @@ export default function SkillDeclaration({ onNext, onBack }) {
               Continue
             </button>
           </div>
+
+          {onRoleTransition && (
+            <div className="skill-declaration-role-transition">
+              <button
+                type="button"
+                className="skill-declaration-role-transition-btn"
+                onClick={onRoleTransition}
+              >
+                <span className="skill-declaration-role-transition-icon">🔄</span>
+                <div className="skill-declaration-role-transition-content">
+                  <span className="skill-declaration-role-transition-title">Explore Role Transition</span>
+                  <span className="skill-declaration-role-transition-desc">See how your skills align with different roles</span>
+                </div>
+              </button>
+            </div>
+          )}
         </div>
       </PageContainer>
     </div>

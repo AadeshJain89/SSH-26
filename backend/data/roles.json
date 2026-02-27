@@ -1,0 +1,22 @@
+[
+  {
+    "id": "Frontend",
+    "name": "Frontend Developer",
+    "skill_topics": ["HTML", "HTML/CSS", "CSS", "React", "JavaScript", "DOM", "Web"]
+  },
+  {
+    "id": "Backend",
+    "name": "Backend Developer",
+    "skill_topics": ["Database", "Security", "Architecture", "API"]
+  },
+  {
+    "id": "DevOps",
+    "name": "DevOps Engineer",
+    "skill_topics": ["CI/CD", "Containers", "Cloud", "Version control", "Monitoring", "Infrastructure", "Security", "Deployment"]
+  },
+  {
+    "id": "App Dev",
+    "name": "App Developer",
+    "skill_topics": ["Mobile"]
+  }
+]

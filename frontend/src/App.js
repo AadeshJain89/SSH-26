@@ -7,11 +7,13 @@ import SkillDeclaration from "./pages/SkillDeclaration";
 import Quiz from "./pages/Quiz";
 import ConfidenceCompetence from "./pages/ConfidenceCompetence";
 import Roadmap from "./pages/Roadmap";
+import RoleTransition from "./pages/RoleTransition";
 
 function App() {
   const [step, setStep] = useState(0);
   const [showAuth, setShowAuth] = useState(false);
   const [showBlog, setShowBlog] = useState(false);
+  const [showRoleTransition, setShowRoleTransition] = useState(false);
 
   // GLOBAL STATE (important)
   const [declaredSkills, setDeclaredSkills] = useState([]);
@@ -22,6 +24,7 @@ function App() {
 
   const goNext = () => setStep((prev) => prev + 1);
   const goBack = () => setStep((prev) => prev - 1);
+  const goToRoleTransition = () => setShowRoleTransition(true);
 
   if (showAuth) {
     return (
@@ -39,6 +42,15 @@ function App() {
     return <Blog onBack={() => setShowBlog(false)} />;
   }
 
+  if (showRoleTransition) {
+    return (
+      <RoleTransition
+        verificationResults={verificationResults}
+        onBack={() => setShowRoleTransition(false)}
+      />
+    );
+  }
+
   return (
     <>
       {step === 0 && (
@@ -46,6 +58,7 @@ function App() {
           onStart={goNext}
           onOpenAuth={() => setShowAuth(true)}
           onOpenBlog={() => setShowBlog(true)}
+          onOpenRoleTransition={goToRoleTransition}
         />
       )}
 
@@ -56,6 +69,7 @@ function App() {
             goNext();
           }}
           onBack={goBack}
+          onRoleTransition={goToRoleTransition}
         />
       )}
 

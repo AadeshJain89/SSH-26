@@ -1,7 +1,7 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
-from backend.data.loader import load_role_skills
+from backend.data.loader import load_role_skills, load_roles
 from backend.data.store import record_assessment
 from backend.logic.assessment_engine import SkillStatus, classify_skills
 from backend.logic.recommendation_engine import generate_roadmap
@@ -10,9 +10,14 @@ from backend.models.schemas import (
     RoadmapResponse,
     QuizSubmissionRequest,
     QuizSubmissionResponse,
+    TopicScoresRequest,
+    MultiRoleAlignmentResponse,
+    RoleTransitionRequest,
+    RoleTransitionResponse,
 )
 from backend.data.store import record_quiz_submission
 from backend.logic.confidence import detect_overconfidence
+from backend.logic.role_alignment import compute_multi_role_alignment, compute_role_transition
 
 from backend.api.auth import router as auth_router
 from backend.api.analytics import router as analytics_router
@@ -93,3 +98,30 @@ def submit_quiz(request: QuizSubmissionRequest):
         overconfidence_detected=detected,
         overconfidence_summary=summary if detected else None,
     )
+
+
+@app.post("/multi-role-alignment", response_model=MultiRoleAlignmentResponse)
+def multi_role_alignment_api(request: TopicScoresRequest):
+    """
+    Returns ranked role fit: for each role, alignment %, skills met, skill gap.
+    Body: { "topic_scores": { "Backend": { "Database": { "correct", "total" }, ... }, ... } }
+    """
+    roles = load_roles()
+    roles_result = compute_multi_role_alignment(roles, request.topic_scores)
+    return MultiRoleAlignmentResponse(roles=roles_result)
+
+
+@app.post("/role-transition", response_model=RoleTransitionResponse)
+def role_transition_api(request: RoleTransitionRequest):
+    """
+    Simulates moving from one role to another: gap delta, skills already met, effort estimate.
+    Body: { "from_role_id", "to_role_id", "topic_scores": { ... } }
+    """
+    roles = load_roles()
+    result = compute_role_transition(
+        roles,
+        request.topic_scores,
+        request.from_role_id,
+        request.to_role_id,
+    )
+    return RoleTransitionResponse(**result)

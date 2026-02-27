@@ -223,6 +223,290 @@
   border: 1px solid #ecf0f1;
 }
 
+.roadmap-subtitle-small {
+  font-size: 14px;
+  color: var(--roadmap-muted);
+  margin: -8px 0 16px;
+}
+
+/* ---------- Role fit ---------- */
+.roadmap-role-fit {
+  margin-top: 32px;
+}
+
+.roadmap-role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.roadmap-role-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #f8fafb;
+  border: 1px solid #ecf0f1;
+  border-radius: 8px;
+}
+
+.roadmap-role-rank {
+  font-weight: 700;
+  color: var(--roadmap-accent);
+  min-width: 32px;
+}
+
+.roadmap-role-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.roadmap-role-main strong {
+  font-size: 16px;
+}
+
+.roadmap-role-pct {
+  font-size: 14px;
+  color: var(--roadmap-muted);
+}
+
+.roadmap-role-meta {
+  width: 100%;
+  margin: 0;
+  padding-left: 44px;
+  font-size: 13px;
+  color: var(--roadmap-muted);
+}
+
+/* ---------- Career Transition Path (Template Design) ---------- */
+.roadmap-career-transition {
+  margin-top: 48px;
+  padding: 40px;
+  background: #f0f7ff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(26, 95, 122, 0.08);
+}
+
+.roadmap-career-transition-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.roadmap-career-transition-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--roadmap-dark);
+  margin: 0 0 8px 0;
+}
+
+.roadmap-career-transition-subtitle {
+  font-size: 15px;
+  color: var(--roadmap-muted);
+  margin: 0;
+}
+
+.roadmap-transition-section {
+  margin-bottom: 32px;
+}
+
+.roadmap-transition-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--roadmap-dark);
+  margin: 0 0 20px 0;
+}
+
+.roadmap-transition-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.roadmap-transition-role-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.roadmap-transition-role-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--roadmap-dark);
+  margin: 0;
+}
+
+.roadmap-transition-select {
+  padding: 12px 16px;
+  background: #ffffff;
+  border: 1px solid #dce9f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--roadmap-dark);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235b7a8c' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+  transition: border-color 0.2s ease;
+}
+
+.roadmap-transition-select:hover {
+  border-color: #b8d4e3;
+}
+
+.roadmap-transition-select:focus {
+  outline: none;
+  border-color: var(--roadmap-accent);
+  box-shadow: 0 0 0 3px rgba(26, 95, 122, 0.1);
+}
+
+.roadmap-transition-arrow {
+  font-size: 32px;
+  color: #4a9fd4;
+  font-weight: 300;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+/* Skills to Develop Section */
+.roadmap-skills-develop {
+  margin-top: 32px;
+}
+
+.roadmap-skills-develop-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--roadmap-dark);
+  margin: 0 0 8px 0;
+}
+
+.roadmap-skills-develop-subtitle {
+  font-size: 14px;
+  color: var(--roadmap-muted);
+  margin: 0 0 20px 0;
+}
+
+.roadmap-skills-container {
+  margin-bottom: 24px;
+}
+
+.roadmap-skills-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--roadmap-dark);
+  margin-bottom: 12px;
+}
+
+.roadmap-skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+  border: 2px dashed #dce9f0;
+  border-radius: 8px;
+  background: #ffffff;
+  min-height: 80px;
+}
+
+.roadmap-skills-empty {
+  padding: 20px;
+  text-align: center;
+  color: var(--roadmap-muted);
+  font-size: 14px;
+}
+
+.roadmap-skill-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #f8fafb;
+  border: 1px solid #ecf0f1;
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--roadmap-dark);
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.roadmap-skill-tag:hover {
+  background: #e8f4f8;
+  border-color: #b8d4e3;
+}
+
+.roadmap-skill-tag-met {
+  background: #e8f5e9;
+  border-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.roadmap-skills-tags-met {
+  border-color: #c8e6c9;
+  background: #f1f8f4;
+}
+
+.roadmap-transition-no-results {
+  margin-top: 24px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px dashed #dce9f0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.roadmap-transition-no-results p {
+  color: var(--roadmap-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.roadmap-transition-loading-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.roadmap-transition-loading {
+  color: var(--roadmap-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.roadmap-transition-effort-info {
+  margin-top: 24px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #ecf0f1;
+}
+
+.roadmap-transition-effort {
+  font-weight: 600;
+  color: var(--roadmap-dark);
+  font-size: 14px;
+  margin: 0;
+}
+
+.roadmap-skills-met {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.roadmap-skills-met-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--roadmap-dark);
+  margin-bottom: 12px;
+  display: block;
+}
+
 /* Responsive: stack columns */
 @media (max-width: 900px) {
   .roadmap-diagram {
@@ -261,5 +545,28 @@
     flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
+  }
+
+  .roadmap-career-transition {
+    padding: 24px 16px;
+  }
+
+  .roadmap-career-transition-title {
+    font-size: 22px;
+  }
+
+  .roadmap-transition-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .roadmap-transition-arrow {
+    transform: rotate(90deg);
+    margin: 8px 0;
+    align-self: center;
+  }
+
+  .roadmap-transition-role-group {
+    max-width: 100%;
   }
 }

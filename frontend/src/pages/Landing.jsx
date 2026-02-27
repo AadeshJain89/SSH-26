@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import "./Landing.css";
 
-export default function Landing({ onStart, onOpenAuth, onOpenBlog }) {
+export default function Landing({ onStart, onOpenAuth, onOpenBlog, onOpenRoleTransition }) {
   const [contactOpen, setContactOpen] = useState(false);
   const contactRef = useRef(null);
 
@@ -30,6 +30,13 @@ export default function Landing({ onStart, onOpenAuth, onOpenBlog }) {
           <nav className="landing-nav">
             <a href="#home">HOME</a>
             <a href="#about">ABOUT US</a>
+            {onOpenRoleTransition ? (
+              <button type="button" className="landing-nav-link" onClick={onOpenRoleTransition}>
+                ROLE TRANSITION
+              </button>
+            ) : (
+              <a href="#role-transition">ROLE TRANSITION</a>
+            )}
             {onOpenBlog ? (
               <button type="button" className="landing-nav-link" onClick={onOpenBlog}>
                 BLOG
