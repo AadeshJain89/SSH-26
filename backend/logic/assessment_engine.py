@@ -1,6 +1,3 @@
-"""
-Adaptive assessment engine: difficulty branching and skill classification.
-"""
 from enum import Enum
 from typing import Dict, List
 

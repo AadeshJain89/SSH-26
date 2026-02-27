@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8000";
+// In Vercel: set REACT_APP_API_URL to your backend URL (e.g. https://your-api.vercel.app)
+const BASE_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000";
 
 export async function generateRoadmap(payload) {
   const response = await axios.post(

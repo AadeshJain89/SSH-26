@@ -1,3 +1,4 @@
+import os
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
@@ -22,10 +23,13 @@ from backend.logic.role_alignment import compute_multi_role_alignment, compute_r
 from backend.api.auth import router as auth_router
 from backend.api.analytics import router as analytics_router
 
+# CORS: set CORS_ORIGINS in Vercel (e.g. "https://your-app.vercel.app") or leave default for local dev
+_cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").strip().split(",")
+
 app = FastAPI(title="Skill Gap Backend Prototype")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[o.strip() for o in _cors_origins if o.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,0 +1,9 @@
+[project]
+name = "skill-gap-plat"
+version = "0.1.0"
+description = "Skill Gap Platform Backend (FastAPI)"
+requires-python = ">=3.10"
+
+# Vercel FastAPI entrypoint: points to the FastAPI app instance
+[project.scripts]
+app = "backend.api.main:app"
