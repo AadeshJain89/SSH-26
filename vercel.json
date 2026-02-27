@@ -1,7 +1,1 @@
-{
-  "functions": {
-    "api/main.py": {
-      "includeFiles": "backend/data/**"
-    }
-  }
-}
+{}
