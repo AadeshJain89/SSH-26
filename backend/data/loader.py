@@ -1,9 +1,23 @@
 import json
+import os
 from pathlib import Path
 from typing import List, Dict
 
 
-DATA_DIR = Path(__file__).parent
+def _data_dir() -> Path:
+    """Resolve backend/data so it works locally and on Vercel serverless."""
+    # Same package as this file (e.g. .../backend/data/)
+    same_dir = Path(__file__).resolve().parent
+    if (same_dir / "role_skills.json").exists():
+        return same_dir
+    # Fallback: repo root / backend / data (e.g. cwd is repo root on Vercel)
+    cwd_data = Path(os.getcwd()) / "backend" / "data"
+    if (cwd_data / "role_skills.json").exists():
+        return cwd_data
+    return same_dir
+
+
+DATA_DIR = _data_dir()
 
 
 def load_role_skills() -> List[Dict]:
